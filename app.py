@@ -14,184 +14,95 @@ st.set_page_config(
 
 
 # =========================================================
-# CSS TAMPILAN
+# CSS
 # =========================================================
 
 st.markdown(
     """
     <style>
 
-    /* =========================
-       BACKGROUND
-       ========================= */
-
     .stApp {
-        background: linear-gradient(
-            135deg,
-            #eef2ff 0%,
-            #f8fafc 50%,
-            #ecfeff 100%
-        );
+        background-color: #f5f7fb;
     }
 
-    /* =========================
-       HEADER
-       ========================= */
-
-    .header-box {
-        background: linear-gradient(
-            135deg,
-            #4f46e5,
-            #7c3aed
-        );
-        padding: 28px;
-        border-radius: 20px;
-        text-align: center;
+    .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
         color: white;
-        margin-bottom: 25px;
-        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
-    }
-
-    .header-title {
-        font-size: 38px;
-        font-weight: 800;
-        margin-bottom: 5px;
-    }
-
-    .header-subtitle {
-        font-size: 16px;
-        opacity: 0.9;
-    }
-
-    /* =========================
-       CARD
-       ========================= */
-
-    .box {
-        background: white;
-        border: 2px solid #dbeafe;
-        border-radius: 16px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 5px 15px rgba(15, 23, 42, 0.08);
-    }
-
-    .matrix-box {
-        background: white;
-        border: 3px solid #6366f1;
-        border-radius: 18px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 7px 18px rgba(99, 102, 241, 0.15);
-    }
-
-    .result-box {
-        background: #ecfdf5;
-        border: 3px solid #22c55e;
-        border-radius: 18px;
         padding: 25px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 7px 18px rgba(34, 197, 94, 0.15);
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 25px;
     }
 
-    .step-box {
-        background: #fffbeb;
-        border: 3px solid #f59e0b;
-        border-radius: 18px;
-        padding: 22px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 7px 18px rgba(245, 158, 11, 0.12);
+    .header h1 {
+        margin: 0;
+        font-size: 35px;
     }
 
-    .info-box {
-        background: #eff6ff;
-        border: 2px solid #3b82f6;
-        border-radius: 16px;
+    .header p {
+        margin: 8px 0 0 0;
+        font-size: 16px;
+    }
+
+    .card {
+        background: white;
         padding: 20px;
-        margin-top: 20px;
-    }
-
-    /* =========================
-       JUDUL CARD
-       ========================= */
-
-    .box-title {
-        font-size: 22px;
-        font-weight: 800;
-        color: #1e293b;
-        margin-bottom: 15px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.07);
     }
 
     .matrix-title {
+        text-align: center;
         font-size: 22px;
-        font-weight: 800;
+        font-weight: bold;
         color: #4f46e5;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
-    .result-title {
-        font-size: 23px;
-        font-weight: 800;
-        color: #15803d;
-        margin-bottom: 15px;
-    }
-
-    .step-title {
-        font-size: 23px;
-        font-weight: 800;
-        color: #b45309;
-        margin-bottom: 15px;
-    }
-
-    /* =========================
-       TOMBOL
-       ========================= */
-
-    div.stButton > button {
-        width: 100%;
-        min-height: 50px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 800;
-        border: none;
-    }
-
-    /* =========================
-       INPUT
-       ========================= */
-
+    /* Kotak setiap elemen matriks */
     div[data-testid="stNumberInput"] {
-        background: white;
+        background-color: white !important;
+        border: 2px solid #6366f1 !important;
+        border-radius: 7px !important;
+        padding: 2px !important;
+        margin-bottom: 5px !important;
+    }
+
+    div[data-testid="stNumberInput"]:focus-within {
+        border-color: #312e81 !important;
+        box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+
+    div[data-testid="stNumberInput"] input {
+        text-align: center !important;
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        color: #111827 !important;
+    }
+
+    .result-box {
+        background-color: #eef2ff;
+        border-left: 5px solid #4f46e5;
+        padding: 18px;
         border-radius: 10px;
+        margin-top: 20px;
     }
 
-    /* =========================
-       SIDEBAR
-       ========================= */
-
-    section[data-testid="stSidebar"] {
-        background: linear-gradient(
-            180deg,
-            #1e1b4b,
-            #312e81
-        );
+    .step-box {
+        background-color: white;
+        border: 1px solid #d1d5db;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 10px;
     }
-
-    section[data-testid="stSidebar"] * {
-        color: white;
-    }
-
-    /* =========================
-       FOOTER
-       ========================= */
 
     .footer {
         text-align: center;
-        color: #64748b;
-        padding: 25px;
-        font-size: 14px;
+        color: #6b7280;
+        padding: 30px;
+        margin-top: 30px;
     }
 
     </style>
@@ -206,13 +117,9 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="header-box">
-        <div class="header-title">
-            🧮 KALKULATOR MATRIKS
-        </div>
-        <div class="header-subtitle">
-            Perhitungan matriks lengkap dengan langkah penyelesaian
-        </div>
+    <div class="header">
+        <h1>🧮 Kalkulator Matriks</h1>
+        <p>Perhitungan matriks menggunakan Python dan Streamlit</p>
     </div>
     """,
     unsafe_allow_html=True
@@ -220,43 +127,13 @@ st.markdown(
 
 
 # =========================================================
-# FUNGSI CARD
-# =========================================================
-
-def card(judul, jenis="box"):
-
-    st.markdown(
-        f"""
-        <div class="{jenis}">
-            <div class="box-title">
-                {judul}
-            </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-
-def end_card():
-
-    st.markdown(
-        "</div>",
-        unsafe_allow_html=True
-    )
-
-
-# =========================================================
-# INPUT MATRIKS
+# FUNGSI INPUT MATRIKS
 # =========================================================
 
 def input_matrix(nama, baris, kolom, prefix):
 
     st.markdown(
-        f"""
-        <div class="matrix-box">
-            <div class="matrix-title">
-                📐 MATRIKS {nama}
-            </div>
-        """,
+        f'<div class="matrix-title">Matriks {nama}</div>',
         unsafe_allow_html=True
     )
 
@@ -264,91 +141,65 @@ def input_matrix(nama, baris, kolom, prefix):
 
     for i in range(baris):
 
-        kolom_input = st.columns(kolom)
+        columns = st.columns(kolom, gap="small")
 
         row = []
 
         for j in range(kolom):
 
-            nilai = kolom_input[j].number_input(
-                f"{nama}[{i+1},{j+1}]",
-                value=0.0,
-                step=1.0,
-                format="%.2f",
-                key=f"{prefix}_{i}_{j}"
-            )
+            with columns[j]:
 
-            nilai = sp.Rational(
-                str(nilai)
-            ).limit_denominator(100000)
+                nilai = st.number_input(
+                    f"{nama}[{i+1},{j+1}]",
+                    value=0.0,
+                    step=1.0,
+                    format="%.0f",
+                    key=f"{prefix}_{i}_{j}",
+                    label_visibility="collapsed"
+                )
 
-            row.append(nilai)
+                row.append(
+                    sp.Rational(
+                        str(nilai)
+                    ).limit_denominator(100000)
+                )
 
         data.append(row)
-
-    st.markdown(
-        "</div>",
-        unsafe_allow_html=True
-    )
 
     return sp.Matrix(data)
 
 
 # =========================================================
-# TAMPILKAN HASIL
+# FUNGSI MENAMPILKAN HASIL
 # =========================================================
 
-def tampilkan_hasil(judul, matriks):
+def tampilkan_hasil(judul, hasil):
 
     st.markdown(
         f"""
         <div class="result-box">
-            <div class="result-title">
-                {judul}
-            </div>
+            <h3>{judul}</h3>
+        </div>
         """,
         unsafe_allow_html=True
     )
 
-    st.latex(
-        sp.latex(matriks)
-    )
-
-    st.markdown(
-        "</div>",
-        unsafe_allow_html=True
-    )
+    st.latex(sp.latex(hasil))
 
 
 # =========================================================
-# TAMPILKAN LANGKAH
+# FUNGSI LANGKAH
 # =========================================================
 
-def tampilkan_langkah(judul, langkah):
+def tampilkan_langkah(teks):
 
     st.markdown(
         f"""
         <div class="step-box">
-            <div class="step-title">
-                {judul}
-            </div>
+            <b>📌 Langkah:</b><br>
+            {teks}
+        </div>
         """,
-        unsafe_allow_html=True
-    )
-
-    for nomor, langkah_satu in enumerate(
-        langkah,
-        start=1
-    ):
-
-        st.markdown(
-            f"**Langkah {nomor}**"
-        )
-
-        st.latex(langkah_satu)
-
-    st.markdown(
-        "</div>",
         unsafe_allow_html=True
     )
 
@@ -357,22 +208,10 @@ def tampilkan_langkah(judul, langkah):
 # SIDEBAR
 # =========================================================
 
-st.sidebar.markdown(
-    """
-    <div style="
-        text-align:center;
-        font-size:28px;
-        font-weight:800;
-        margin-bottom:20px;
-    ">
-        🧮 MENU
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.sidebar.title("⚙️ Menu Operasi")
 
 operasi = st.sidebar.selectbox(
-    "Pilih Operasi",
+    "Pilih operasi:",
     [
         "Penjumlahan",
         "Pengurangan",
@@ -382,34 +221,8 @@ operasi = st.sidebar.selectbox(
         "Invers",
         "Rank",
         "Trace",
-        "SPL - Gauss-Jordan"
+        "SPL Gauss-Jordan"
     ]
-)
-
-st.sidebar.markdown("---")
-
-st.sidebar.markdown(
-    """
-    ### 📚 Operasi
-
-    ➕ Penjumlahan
-
-    ➖ Pengurangan
-
-    ✖️ Perkalian
-
-    🔄 Transpose
-
-    📊 Determinan
-
-    🔁 Invers
-
-    📈 Rank
-
-    Σ Trace
-
-    📐 SPL
-    """
 )
 
 
@@ -419,124 +232,86 @@ st.sidebar.markdown(
 
 if operasi == "Penjumlahan":
 
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
     st.subheader("➕ Penjumlahan Matriks")
 
     col1, col2 = st.columns(2)
 
     with col1:
 
-        card("Ukuran Matriks A")
-
-        baris_a = st.number_input(
-            "Jumlah baris A",
+        baris = st.number_input(
+            "Jumlah baris",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="add_ra"
+            key="tambah_baris"
         )
-
-        kolom_a = st.number_input(
-            "Jumlah kolom A",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="add_ka"
-        )
-
-        end_card()
 
     with col2:
 
-        card("Ukuran Matriks B")
-
-        baris_b = st.number_input(
-            "Jumlah baris B",
+        kolom = st.number_input(
+            "Jumlah kolom",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="add_rb"
+            key="tambah_kolom"
         )
 
-        kolom_b = st.number_input(
-            "Jumlah kolom B",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="add_kb"
-        )
-
-        end_card()
+    st.markdown("</div>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
 
+        st.markdown(
+            '<div class="card">',
+            unsafe_allow_html=True
+        )
+
         A = input_matrix(
             "A",
-            int(baris_a),
-            int(kolom_a),
-            "add_A"
+            int(baris),
+            int(kolom),
+            "tambah_A"
         )
+
+        st.markdown("</div>", unsafe_allow_html=True)
 
     with col2:
 
-        B = input_matrix(
-            "B",
-            int(baris_b),
-            int(kolom_b),
-            "add_B"
+        st.markdown(
+            '<div class="card">',
+            unsafe_allow_html=True
         )
 
+        B = input_matrix(
+            "B",
+            int(baris),
+            int(kolom),
+            "tambah_B"
+        )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button(
-        "➕ HITUNG A + B",
-        type="primary"
+        "🧮 Hitung A + B",
+        use_container_width=True
     ):
 
-        if A.shape != B.shape:
+        hasil = A + B
 
-            st.error(
-                "❌ Ukuran Matriks A dan B harus sama."
-            )
+        tampilkan_hasil(
+            "Hasil A + B",
+            hasil
+        )
 
-        else:
-
-            C = A + B
-
-            tampilkan_hasil(
-                "🟢 HASIL A + B",
-                C
-            )
-
-            langkah = []
-
-            for i in range(A.rows):
-
-                for j in range(A.cols):
-
-                    langkah.append(
-                        rf"""
-                        C_{{{i+1},{j+1}}}
-                        =
-                        A_{{{i+1},{j+1}}}
-                        +
-                        B_{{{i+1},{j+1}}}
-                        =
-                        {sp.latex(A[i,j])}
-                        +
-                        {sp.latex(B[i,j])}
-                        =
-                        \mathbf{{{sp.latex(C[i,j])}}}
-                        """
-                    )
-
-            tampilkan_langkah(
-                "📖 LANGKAH PENJUMLAHAN",
-                langkah
-            )
+        tampilkan_langkah(
+            "Elemen yang memiliki posisi sama dijumlahkan."
+        )
 
 
 # =========================================================
@@ -545,124 +320,87 @@ if operasi == "Penjumlahan":
 
 elif operasi == "Pengurangan":
 
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
     st.subheader("➖ Pengurangan Matriks")
 
     col1, col2 = st.columns(2)
 
     with col1:
 
-        card("Ukuran Matriks A")
-
-        baris_a = st.number_input(
-            "Jumlah baris A",
+        baris = st.number_input(
+            "Jumlah baris",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="sub_ra"
+            key="kurang_baris"
         )
-
-        kolom_a = st.number_input(
-            "Jumlah kolom A",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="sub_ka"
-        )
-
-        end_card()
 
     with col2:
 
-        card("Ukuran Matriks B")
-
-        baris_b = st.number_input(
-            "Jumlah baris B",
+        kolom = st.number_input(
+            "Jumlah kolom",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="sub_rb"
+            key="kurang_kolom"
         )
 
-        kolom_b = st.number_input(
-            "Jumlah kolom B",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="sub_kb"
-        )
-
-        end_card()
+    st.markdown("</div>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
 
+        st.markdown(
+            '<div class="card">',
+            unsafe_allow_html=True
+        )
+
         A = input_matrix(
             "A",
-            int(baris_a),
-            int(kolom_a),
-            "sub_A"
+            int(baris),
+            int(kolom),
+            "kurang_A"
         )
+
+        st.markdown("</div>", unsafe_allow_html=True)
 
     with col2:
 
-        B = input_matrix(
-            "B",
-            int(baris_b),
-            int(kolom_b),
-            "sub_B"
+        st.markdown(
+            '<div class="card">',
+            unsafe_allow_html=True
         )
 
+        B = input_matrix(
+            "B",
+            int(baris),
+            int(kolom),
+            "kurang_B"
+        )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button(
-        "➖ HITUNG A - B",
-        type="primary"
+        "🧮 Hitung A − B",
+        use_container_width=True
     ):
 
-        if A.shape != B.shape:
+        hasil = A - B
 
-            st.error(
-                "❌ Ukuran Matriks A dan B harus sama."
-            )
+        tampilkan_hasil(
+            "Hasil A − B",
+            hasil
+        )
 
-        else:
-
-            C = A - B
-
-            tampilkan_hasil(
-                "🟢 HASIL A - B",
-                C
-            )
-
-            langkah = []
-
-            for i in range(A.rows):
-
-                for j in range(A.cols):
-
-                    langkah.append(
-                        rf"""
-                        C_{{{i+1},{j+1}}}
-                        =
-                        A_{{{i+1},{j+1}}}
-                        -
-                        B_{{{i+1},{j+1}}}
-                        =
-                        {sp.latex(A[i,j])}
-                        -
-                        {sp.latex(B[i,j])}
-                        =
-                        \mathbf{{{sp.latex(C[i,j])}}}
-                        """
-                    )
-
-            tampilkan_langkah(
-                "📖 LANGKAH PENGURANGAN",
-                langkah
-            )
+        tampilkan_langkah(
+            "Elemen matriks B dikurangkan dari elemen matriks A "
+            "yang berada pada posisi yang sama."
+        )
 
 
 # =========================================================
@@ -671,133 +409,128 @@ elif operasi == "Pengurangan":
 
 elif operasi == "Perkalian":
 
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
     st.subheader("✖️ Perkalian Matriks")
+
+    st.markdown("### Ukuran Matriks A")
 
     col1, col2 = st.columns(2)
 
     with col1:
 
-        card("Ukuran Matriks A")
-
-        baris_a = st.number_input(
-            "Jumlah baris A",
+        baris_A = st.number_input(
+            "Baris A",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="mul_ra"
+            key="kali_baris_A"
         )
-
-        kolom_a = st.number_input(
-            "Jumlah kolom A",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="mul_ka"
-        )
-
-        end_card()
 
     with col2:
 
-        card("Ukuran Matriks B")
-
-        baris_b = st.number_input(
-            "Jumlah baris B",
+        kolom_A = st.number_input(
+            "Kolom A",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="mul_rb"
+            key="kali_kolom_A"
         )
 
-        kolom_b = st.number_input(
-            "Jumlah kolom B",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="mul_kb"
-        )
-
-        end_card()
+    st.markdown("### Ukuran Matriks B")
 
     col1, col2 = st.columns(2)
 
     with col1:
+
+        baris_B = st.number_input(
+            "Baris B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            key="kali_baris_B"
+        )
+
+    with col2:
+
+        kolom_B = st.number_input(
+            "Kolom B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            key="kali_kolom_B"
+        )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    if int(kolom_A) != int(baris_B):
+
+        st.warning(
+            "⚠️ Jumlah kolom Matriks A harus sama "
+            "dengan jumlah baris Matriks B."
+        )
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.markdown(
+            '<div class="card">',
+            unsafe_allow_html=True
+        )
 
         A = input_matrix(
             "A",
-            int(baris_a),
-            int(kolom_a),
-            "mul_A"
+            int(baris_A),
+            int(kolom_A),
+            "kali_A"
         )
+
+        st.markdown("</div>", unsafe_allow_html=True)
 
     with col2:
 
-        B = input_matrix(
-            "B",
-            int(baris_b),
-            int(kolom_b),
-            "mul_B"
+        st.markdown(
+            '<div class="card">',
+            unsafe_allow_html=True
         )
 
+        B = input_matrix(
+            "B",
+            int(baris_B),
+            int(kolom_B),
+            "kali_B"
+        )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button(
-        "✖️ HITUNG A × B",
-        type="primary"
+        "🧮 Hitung A × B",
+        use_container_width=True
     ):
 
-        if A.cols != B.rows:
+        if int(kolom_A) != int(baris_B):
 
             st.error(
-                "❌ Perkalian tidak dapat dilakukan."
-            )
-
-            st.info(
-                "Jumlah kolom A harus sama "
-                "dengan jumlah baris B."
+                "Perkalian tidak dapat dilakukan karena "
+                "ukuran matriks tidak memenuhi syarat."
             )
 
         else:
 
-            C = A * B
+            hasil = A * B
 
             tampilkan_hasil(
-                "🟢 HASIL A × B",
-                C
+                "Hasil A × B",
+                hasil
             )
 
-            langkah = []
-
-            for i in range(C.rows):
-
-                for j in range(C.cols):
-
-                    bagian = []
-
-                    for k in range(A.cols):
-
-                        bagian.append(
-                            f"({sp.latex(A[i,k])})"
-                            f"({sp.latex(B[k,j])})"
-                        )
-
-                    persamaan = " + ".join(bagian)
-
-                    langkah.append(
-                        rf"""
-                        C_{{{i+1},{j+1}}}
-                        =
-                        {persamaan}
-                        =
-                        \mathbf{{{sp.latex(C[i,j])}}}
-                        """
-                    )
-
             tampilkan_langkah(
-                "📖 LANGKAH PERKALIAN",
-                langkah
+                "Setiap elemen hasil diperoleh dari perkalian "
+                "baris Matriks A dengan kolom Matriks B."
             )
 
 
@@ -807,71 +540,66 @@ elif operasi == "Perkalian":
 
 elif operasi == "Transpose":
 
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
     st.subheader("🔄 Transpose Matriks")
 
     col1, col2 = st.columns(2)
 
     with col1:
 
-        card("Ukuran Matriks")
-
         baris = st.number_input(
             "Jumlah baris",
             min_value=1,
             max_value=8,
             value=2,
-            step=1,
-            key="trans_r"
+            key="transpose_baris"
         )
 
-        end_card()
-
     with col2:
-
-        card("Ukuran Matriks")
 
         kolom = st.number_input(
             "Jumlah kolom",
             min_value=1,
             max_value=8,
-            value=2,
-            step=1,
-            key="trans_k"
+            value=3,
+            key="transpose_kolom"
         )
 
-        end_card()
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
 
     A = input_matrix(
         "A",
         int(baris),
         int(kolom),
-        "trans_A"
+        "transpose_A"
     )
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button(
-        "🔄 HITUNG TRANSPOSE",
-        type="primary"
+        "🔄 Hitung Transpose",
+        use_container_width=True
     ):
 
-        C = A.T
+        hasil = A.T
 
         tampilkan_hasil(
-            "🟢 HASIL Aᵀ",
-            C
+            "Transpose Matriks A",
+            hasil
         )
 
         tampilkan_langkah(
-            "📖 LANGKAH TRANSPOSE",
-            [
-                rf"""
-                A =
-                {sp.latex(A)}
-                """,
-                rf"""
-                A^T =
-                {sp.latex(C)}
-                """
-            ]
+            "Transpose dilakukan dengan mengubah setiap baris "
+            "menjadi kolom."
         )
 
 
@@ -881,81 +609,52 @@ elif operasi == "Transpose":
 
 elif operasi == "Determinan":
 
-    st.subheader("📊 Determinan Matriks")
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    st.subheader("📐 Determinan Matriks")
 
     ukuran = st.number_input(
-        "Ukuran matriks persegi",
+        "Ukuran matriks",
         min_value=1,
         max_value=8,
         value=2,
-        step=1,
-        key="det_n"
+        key="determinan_ukuran"
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
     )
 
     A = input_matrix(
         "A",
         int(ukuran),
         int(ukuran),
-        "det_A"
+        "determinan_A"
     )
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button(
-        "📊 HITUNG DETERMINAN",
-        type="primary"
+        "📐 Hitung Determinan",
+        use_container_width=True
     ):
 
-        hasil = sp.simplify(A.det())
+        hasil = A.det()
 
         tampilkan_hasil(
-            "🟢 HASIL DETERMINAN",
-            sp.Matrix([[hasil]])
+            "Determinan A",
+            hasil
         )
 
-        langkah = []
-
-        if A.rows == 2:
-
-            a = A[0, 0]
-            b = A[0, 1]
-            c = A[1, 0]
-            d = A[1, 1]
-
-            langkah.append(
-                rf"""
-                \det(A)
-                =
-                ({sp.latex(a)})
-                ({sp.latex(d)})
-                -
-                ({sp.latex(b)})
-                ({sp.latex(c)})
-                """
-            )
-
-            langkah.append(
-                rf"""
-                =
-                {sp.latex(a*d)}
-                -
-                {sp.latex(b*c)}
-                =
-                \mathbf{{{sp.latex(hasil)}}}
-                """
-            )
-
-        else:
-
-            langkah.append(
-                rf"""
-                \det(A)
-                =
-                \mathbf{{{sp.latex(hasil)}}}
-                """
-            )
-
         tampilkan_langkah(
-            "📖 LANGKAH DETERMINAN",
-            langkah
+            "Determinan dihitung berdasarkan elemen-elemen "
+            "matriks persegi."
         )
 
 
@@ -965,64 +664,305 @@ elif operasi == "Determinan":
 
 elif operasi == "Invers":
 
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
     st.subheader("🔁 Invers Matriks")
 
     ukuran = st.number_input(
-        "Ukuran matriks persegi",
+        "Ukuran matriks",
         min_value=1,
         max_value=8,
         value=2,
-        step=1,
-        key="inv_n"
+        key="invers_ukuran"
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
     )
 
     A = input_matrix(
         "A",
         int(ukuran),
         int(ukuran),
-        "inv_A"
+        "invers_A"
     )
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
     if st.button(
-        "🔁 HITUNG INVERS",
-        type="primary"
+        "🔁 Hitung Invers",
+        use_container_width=True
     ):
 
-        det = sp.simplify(A.det())
-
-        if det == 0:
+        if A.det() == 0:
 
             st.error(
-                "❌ Matriks tidak memiliki invers "
-                "karena determinannya = 0."
+                "Matriks tidak mempunyai invers karena "
+                "determinan = 0."
             )
 
         else:
 
-            C = A.inv()
+            hasil = A.inv()
 
             tampilkan_hasil(
-                "🟢 HASIL A⁻¹",
-                C
+                "Invers Matriks A",
+                hasil
             )
-
-            langkah = [
-                rf"""
-                \det(A)
-                =
-                {sp.latex(det)}
-                """,
-                rf"""
-                A^{{-1}}
-                =
-                {sp.latex(C)}
-                """
-            ]
 
             tampilkan_langkah(
-                "📖 LANGKAH INVERS",
-                langkah
+                "Syarat matriks mempunyai invers adalah "
+                "determinan matriks tidak sama dengan nol."
             )
 
 
-# ========================================
+# =========================================================
+# RANK
+# =========================================================
+
+elif operasi == "Rank":
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    st.subheader("📊 Rank Matriks")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        baris = st.number_input(
+            "Jumlah baris",
+            min_value=1,
+            max_value=8,
+            value=2,
+            key="rank_baris"
+        )
+
+    with col2:
+
+        kolom = st.number_input(
+            "Jumlah kolom",
+            min_value=1,
+            max_value=8,
+            value=2,
+            key="rank_kolom"
+        )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    A = input_matrix(
+        "A",
+        int(baris),
+        int(kolom),
+        "rank_A"
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button(
+        "📊 Hitung Rank",
+        use_container_width=True
+    ):
+
+        hasil = A.rank()
+
+        tampilkan_hasil(
+            "Rank Matriks A",
+            hasil
+        )
+
+        tampilkan_langkah(
+            "Rank menunjukkan jumlah maksimum baris atau kolom "
+            "yang independen secara linear."
+        )
+
+
+# =========================================================
+# TRACE
+# =========================================================
+
+elif operasi == "Trace":
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    st.subheader("Σ Trace Matriks")
+
+    ukuran = st.number_input(
+        "Ukuran matriks",
+        min_value=1,
+        max_value=8,
+        value=3,
+        key="trace_ukuran"
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    A = input_matrix(
+        "A",
+        int(ukuran),
+        int(ukuran),
+        "trace_A"
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button(
+        "Σ Hitung Trace",
+        use_container_width=True
+    ):
+
+        hasil = A.trace()
+
+        tampilkan_hasil(
+            "Trace Matriks A",
+            hasil
+        )
+
+        tampilkan_langkah(
+            "Trace adalah jumlah elemen pada diagonal utama matriks."
+        )
+
+
+# =========================================================
+# SPL GAUSS-JORDAN
+# =========================================================
+
+elif operasi == "SPL Gauss-Jordan":
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    st.subheader("📚 Sistem Persamaan Linear")
+
+    jumlah = st.number_input(
+        "Jumlah persamaan / variabel",
+        min_value=1,
+        max_value=8,
+        value=2,
+        key="spl_jumlah"
+    )
+
+    st.info(
+        "Masukkan matriks augmented. "
+        "Contoh 2x + 3y = 7 dimasukkan sebagai 2, 3, 7."
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="card">',
+        unsafe_allow_html=True
+    )
+
+    A = input_matrix(
+        "Augmented",
+        int(jumlah),
+        int(jumlah) + 1,
+        "spl_A"
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    if st.button(
+        "📚 Selesaikan SPL",
+        use_container_width=True
+    ):
+
+        rref_matrix, pivot_columns = A.rref()
+
+        tampilkan_hasil(
+            "Hasil Gauss-Jordan / RREF",
+            rref_matrix
+        )
+
+        tampilkan_langkah(
+            "Operasi baris elementer dilakukan sampai matriks "
+            "mencapai bentuk Reduced Row Echelon Form (RREF)."
+        )
+
+        # Cek apakah ada baris kontradiksi
+        ada_kontradiksi = False
+
+        for i in range(rref_matrix.rows):
+
+            semua_nol = True
+
+            for j in range(int(jumlah)):
+
+                if rref_matrix[i, j] != 0:
+
+                    semua_nol = False
+                    break
+
+            konstanta = rref_matrix[i, int(jumlah)]
+
+            if semua_nol and konstanta != 0:
+
+                ada_kontradiksi = True
+
+        if ada_kontradiksi:
+
+            st.error(
+                "SPL tidak memiliki solusi."
+            )
+
+        elif len(pivot_columns) == int(jumlah):
+
+            st.success(
+                "SPL memiliki solusi tunggal."
+            )
+
+            for i in range(int(jumlah)):
+
+                nilai = rref_matrix[i, int(jumlah)]
+
+                st.latex(
+                    f"x_{{{i+1}}} = {sp.latex(nilai)}"
+                )
+
+        else:
+
+            st.warning(
+                "SPL memiliki variabel bebas atau "
+                "memiliki banyak solusi."
+            )
+
+
+# =========================================================
+# FOOTER
+# =========================================================
+
+st.markdown(
+    """
+    <div class="footer">
+        🧮 Kalkulator Matriks
+        <br>
+        Python • Streamlit • SymPy
+    </div>
+    """,
+    unsafe_allow_html=True
+        )
