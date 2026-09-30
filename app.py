@@ -2,9 +2,9 @@ import streamlit as st
 import sympy as sp
 
 
-# ============================================================
-# KONFIGURASI HALAMAN
-# ============================================================
+# =========================================================
+# KONFIGURASI
+# =========================================================
 
 st.set_page_config(
     page_title="Kalkulator Matriks",
@@ -13,99 +13,185 @@ st.set_page_config(
 )
 
 
-# ============================================================
-# CSS / TAMPILAN KOTAK
-# ============================================================
+# =========================================================
+# CSS TAMPILAN
+# =========================================================
 
 st.markdown(
     """
     <style>
 
-    /* Background utama */
+    /* =========================
+       BACKGROUND
+       ========================= */
+
     .stApp {
-        background-color: #f5f7fb;
+        background: linear-gradient(
+            135deg,
+            #eef2ff 0%,
+            #f8fafc 50%,
+            #ecfeff 100%
+        );
     }
 
-    /* Judul utama */
-    .main-title {
+    /* =========================
+       HEADER
+       ========================= */
+
+    .header-box {
+        background: linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+        padding: 28px;
+        border-radius: 20px;
         text-align: center;
+        color: white;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
+    }
+
+    .header-title {
         font-size: 38px;
-        font-weight: 700;
+        font-weight: 800;
         margin-bottom: 5px;
     }
 
-    .main-subtitle {
-        text-align: center;
-        color: #64748b;
+    .header-subtitle {
         font-size: 16px;
-        margin-bottom: 25px;
+        opacity: 0.9;
     }
 
-    /* Kotak/card */
-    .card {
-        background-color: white;
-        border: 1px solid #dbe2ea;
-        border-radius: 15px;
-        padding: 22px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    /* =========================
+       CARD
+       ========================= */
+
+    .box {
+        background: white;
+        border: 2px solid #dbeafe;
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(15, 23, 42, 0.08);
     }
 
-    /* Judul card */
-    .card-title {
-        font-size: 21px;
-        font-weight: 700;
-        margin-bottom: 15px;
+    .matrix-box {
+        background: white;
+        border: 3px solid #6366f1;
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 7px 18px rgba(99, 102, 241, 0.15);
     }
 
-    /* Kotak hasil */
-    .result-card {
-        background-color: white;
-        border: 2px solid #22c55e;
-        border-radius: 15px;
+    .result-box {
+        background: #ecfdf5;
+        border: 3px solid #22c55e;
+        border-radius: 18px;
+        padding: 25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 7px 18px rgba(34, 197, 94, 0.15);
+    }
+
+    .step-box {
+        background: #fffbeb;
+        border: 3px solid #f59e0b;
+        border-radius: 18px;
         padding: 22px;
         margin-top: 20px;
         margin-bottom: 20px;
-        box-shadow: 0 3px 10px rgba(34, 197, 94, 0.10);
+        box-shadow: 0 7px 18px rgba(245, 158, 11, 0.12);
     }
 
-    /* Kotak langkah */
-    .step-card {
-        background-color: white;
-        border: 1px solid #dbe2ea;
-        border-left: 5px solid #6366f1;
-        border-radius: 12px;
-        padding: 18px;
-        margin-top: 12px;
-        margin-bottom: 12px;
-    }
-
-    /* Kotak informasi */
-    .info-card {
-        background-color: white;
-        border: 1px solid #dbe2ea;
-        border-radius: 15px;
+    .info-box {
+        background: #eff6ff;
+        border: 2px solid #3b82f6;
+        border-radius: 16px;
         padding: 20px;
         margin-top: 20px;
     }
 
-    /* Tombol */
+    /* =========================
+       JUDUL CARD
+       ========================= */
+
+    .box-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 15px;
+    }
+
+    .matrix-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #4f46e5;
+        margin-bottom: 15px;
+    }
+
+    .result-title {
+        font-size: 23px;
+        font-weight: 800;
+        color: #15803d;
+        margin-bottom: 15px;
+    }
+
+    .step-title {
+        font-size: 23px;
+        font-weight: 800;
+        color: #b45309;
+        margin-bottom: 15px;
+    }
+
+    /* =========================
+       TOMBOL
+       ========================= */
+
     div.stButton > button {
-        border-radius: 10px;
-        font-weight: 600;
-        min-height: 45px;
+        width: 100%;
+        min-height: 50px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 800;
+        border: none;
     }
 
-    /* Input matriks */
+    /* =========================
+       INPUT
+       ========================= */
+
     div[data-testid="stNumberInput"] {
-        background-color: white;
-        border-radius: 8px;
+        background: white;
+        border-radius: 10px;
     }
 
-    /* Sidebar */
+    /* =========================
+       SIDEBAR
+       ========================= */
+
     section[data-testid="stSidebar"] {
-        background-color: #ffffff;
+        background: linear-gradient(
+            180deg,
+            #1e1b4b,
+            #312e81
+        );
+    }
+
+    section[data-testid="stSidebar"] * {
+        color: white;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+        text-align: center;
+        color: #64748b;
+        padding: 25px;
+        font-size: 14px;
     }
 
     </style>
@@ -114,63 +200,77 @@ st.markdown(
 )
 
 
-# ============================================================
+# =========================================================
 # HEADER
-# ============================================================
+# =========================================================
 
 st.markdown(
-    '<div class="main-title">🧮 Kalkulator Matriks</div>',
+    """
+    <div class="header-box">
+        <div class="header-title">
+            🧮 KALKULATOR MATRIKS
+        </div>
+        <div class="header-subtitle">
+            Perhitungan matriks lengkap dengan langkah penyelesaian
+        </div>
+    </div>
+    """,
     unsafe_allow_html=True
 )
 
-st.markdown(
-    '<div class="main-subtitle">'
-    'Kalkulator matriks dengan hasil dan langkah-langkah penyelesaian'
-    '</div>',
-    unsafe_allow_html=True
-)
 
+# =========================================================
+# FUNGSI CARD
+# =========================================================
 
-# ============================================================
-# FUNGSI MEMBUAT KOTAK
-# ============================================================
+def card(judul, jenis="box"):
 
-def buka_card(judul, kelas="card"):
     st.markdown(
         f"""
-        <div class="{kelas}">
-            <div class="card-title">{judul}</div>
+        <div class="{jenis}">
+            <div class="box-title">
+                {judul}
+            </div>
         """,
         unsafe_allow_html=True
     )
 
 
-def tutup_card():
+def end_card():
+
     st.markdown(
         "</div>",
         unsafe_allow_html=True
     )
 
 
-# ============================================================
-# FUNGSI INPUT MATRIKS
-# ============================================================
+# =========================================================
+# INPUT MATRIKS
+# =========================================================
 
 def input_matrix(nama, baris, kolom, prefix):
 
-    buka_card(f"📐 Matriks {nama}")
+    st.markdown(
+        f"""
+        <div class="matrix-box">
+            <div class="matrix-title">
+                📐 MATRIKS {nama}
+            </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     data = []
 
     for i in range(baris):
 
-        cols = st.columns(kolom)
+        kolom_input = st.columns(kolom)
 
         row = []
 
         for j in range(kolom):
 
-            nilai = cols[j].number_input(
+            nilai = kolom_input[j].number_input(
                 f"{nama}[{i+1},{j+1}]",
                 value=0.0,
                 step=1.0,
@@ -178,470 +278,98 @@ def input_matrix(nama, baris, kolom, prefix):
                 key=f"{prefix}_{i}_{j}"
             )
 
-            nilai_sympy = sp.Rational(
+            nilai = sp.Rational(
                 str(nilai)
             ).limit_denominator(100000)
 
-            row.append(nilai_sympy)
+            row.append(nilai)
 
         data.append(row)
 
-    tutup_card()
+    st.markdown(
+        "</div>",
+        unsafe_allow_html=True
+    )
 
     return sp.Matrix(data)
 
 
-# ============================================================
-# FUNGSI MENAMPILKAN MATRIKS
-# ============================================================
+# =========================================================
+# TAMPILKAN HASIL
+# =========================================================
 
-def tampilkan_matriks(A, judul):
+def tampilkan_hasil(judul, matriks):
 
-    buka_card(judul, "result-card")
+    st.markdown(
+        f"""
+        <div class="result-box">
+            <div class="result-title">
+                {judul}
+            </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.latex(
-        sp.latex(A)
+        sp.latex(matriks)
     )
 
-    tutup_card()
-
-
-# ============================================================
-# FUNGSI LANGKAH PENJUMLAHAN
-# ============================================================
-
-def langkah_penjumlahan(A, B):
-
-    C = A + B
-    langkah = []
-
-    for i in range(A.rows):
-
-        for j in range(A.cols):
-
-            a = A[i, j]
-            b = B[i, j]
-            c = C[i, j]
-
-            langkah.append(
-                rf"""
-                C_{{{i+1},{j+1}}}
-                =
-                A_{{{i+1},{j+1}}}
-                +
-                B_{{{i+1},{j+1}}}
-                =
-                ({sp.latex(a)})
-                +
-                ({sp.latex(b)})
-                =
-                \mathbf{{{sp.latex(c)}}}
-                """
-            )
-
-    return C, langkah
-
-
-# ============================================================
-# FUNGSI LANGKAH PENGURANGAN
-# ============================================================
-
-def langkah_pengurangan(A, B):
-
-    C = A - B
-    langkah = []
-
-    for i in range(A.rows):
-
-        for j in range(A.cols):
-
-            a = A[i, j]
-            b = B[i, j]
-            c = C[i, j]
-
-            langkah.append(
-                rf"""
-                C_{{{i+1},{j+1}}}
-                =
-                A_{{{i+1},{j+1}}}
-                -
-                B_{{{i+1},{j+1}}}
-                =
-                ({sp.latex(a)})
-                -
-                ({sp.latex(b)})
-                =
-                \mathbf{{{sp.latex(c)}}}
-                """
-            )
-
-    return C, langkah
-
-
-# ============================================================
-# FUNGSI LANGKAH PERKALIAN
-# ============================================================
-
-def langkah_perkalian(A, B):
-
-    C = A * B
-    langkah = []
-
-    for i in range(A.rows):
-
-        for j in range(B.cols):
-
-            bagian = []
-
-            for k in range(A.cols):
-
-                bagian.append(
-                    f"({sp.latex(A[i, k])})"
-                    f"({sp.latex(B[k, j])})"
-                )
-
-            persamaan = " + ".join(bagian)
-
-            langkah.append(
-                rf"""
-                C_{{{i+1},{j+1}}}
-                =
-                {persamaan}
-                =
-                \mathbf{{{sp.latex(C[i, j])}}}
-                """
-            )
-
-    return C, langkah
-
-
-# ============================================================
-# FUNGSI DETERMINAN
-# ============================================================
-
-def langkah_determinan(A):
-
-    det = sp.simplify(A.det())
-    langkah = []
-
-    if A.rows == 1:
-
-        langkah.append(
-            rf"""
-            \det(A)
-            =
-            {sp.latex(A[0, 0])}
-            =
-            \mathbf{{{sp.latex(det)}}}
-            """
-        )
-
-    elif A.rows == 2:
-
-        a = A[0, 0]
-        b = A[0, 1]
-        c = A[1, 0]
-        d = A[1, 1]
-
-        langkah.append(
-            rf"""
-            \det(A)
-            =
-            ({sp.latex(a)})({sp.latex(d)})
-            -
-            ({sp.latex(b)})({sp.latex(c)})
-            """
-        )
-
-        langkah.append(
-            rf"""
-            =
-            {sp.latex(a*d)}
-            -
-            {sp.latex(b*c)}
-            """
-        )
-
-        langkah.append(
-            rf"""
-            =
-            \mathbf{{{sp.latex(det)}}}
-            """
-        )
-
-    elif A.rows == 3:
-
-        a = A[0, 0]
-        b = A[0, 1]
-        c = A[0, 2]
-
-        d = A[1, 0]
-        e = A[1, 1]
-        f = A[1, 2]
-
-        g = A[2, 0]
-        h = A[2, 1]
-        i = A[2, 2]
-
-        langkah.append(
-            rf"""
-            \det(A)
-            =
-            ({sp.latex(a)})
-            [({sp.latex(e)})({sp.latex(i)})
-            -
-            ({sp.latex(f)})({sp.latex(h)})]
-            -
-            ({sp.latex(b)})
-            [({sp.latex(d)})({sp.latex(i)})
-            -
-            ({sp.latex(f)})({sp.latex(g)})]
-            +
-            ({sp.latex(c)})
-            [({sp.latex(d)})({sp.latex(h)})
-            -
-            ({sp.latex(e)})({sp.latex(g)})]
-            """
-        )
-
-        langkah.append(
-            rf"""
-            =
-            \mathbf{{{sp.latex(det)}}}
-            """
-        )
-
-    else:
-
-        langkah.append(
-            r"""
-            Matriks berukuran lebih dari 3 × 3.
-            Determinan dihitung menggunakan operasi
-            aljabar matriks.
-            """
-        )
-
-        langkah.append(
-            rf"""
-            \det(A)
-            =
-            \mathbf{{{sp.latex(det)}}}
-            """
-        )
-
-    return det, langkah
-
-
-# ============================================================
-# FUNGSI INVERS
-# ============================================================
-
-def langkah_invers(A):
-
-    det = sp.simplify(A.det())
-
-    if det == 0:
-
-        return None, []
-
-    invers = A.inv()
-    langkah = []
-
-    langkah.append(
-        rf"""
-        \det(A)
-        =
-        {sp.latex(det)}
-        """
+    st.markdown(
+        "</div>",
+        unsafe_allow_html=True
     )
 
-    if A.rows == 2:
 
-        a = A[0, 0]
-        b = A[0, 1]
-        c = A[1, 0]
-        d = A[1, 1]
+# =========================================================
+# TAMPILKAN LANGKAH
+# =========================================================
 
-        langkah.append(
-            rf"""
-            A^{{-1}}
-            =
-            \frac{{1}}{{\det(A)}}
-            \begin{{bmatrix}}
-            d & -b \\
-            -c & a
-            \end{{bmatrix}}
-            """
-        )
+def tampilkan_langkah(judul, langkah):
 
-        langkah.append(
-            rf"""
-            A^{{-1}}
-            =
-            \frac{{1}}{{{sp.latex(det)}}}
-            \begin{{bmatrix}}
-            {sp.latex(d)} & -{sp.latex(b)} \\
-            -{sp.latex(c)} & {sp.latex(a)}
-            \end{{bmatrix}}
-            """
-        )
-
-        langkah.append(
-            rf"""
-            A^{{-1}}
-            =
-            {sp.latex(invers)}
-            """
-        )
-
-    else:
-
-        augmented = A.row_join(
-            sp.eye(A.rows)
-        )
-
-        rref, _ = augmented.rref()
-
-        langkah.append(
-            r"""
-            Invers dihitung menggunakan metode
-            Gauss-Jordan pada matriks augmented [A | I].
-            """
-        )
-
-        langkah.append(
-            rf"""
-            [A|I]
-            =
-            {sp.latex(augmented)}
-            """
-        )
-
-        langkah.append(
-            rf"""
-            RREF([A|I])
-            =
-            {sp.latex(rref)}
-            """
-        )
-
-        langkah.append(
-            rf"""
-            A^{{-1}}
-            =
-            {sp.latex(invers)}
-            """
-        )
-
-    return invers, langkah
-
-
-# ============================================================
-# FUNGSI RREF
-# ============================================================
-
-def rref_dengan_langkah(A):
-
-    M = A.copy()
-    langkah = []
-
-    langkah.append(
-        (
-            "Matriks awal",
-            M.copy()
-        )
+    st.markdown(
+        f"""
+        <div class="step-box">
+            <div class="step-title">
+                {judul}
+            </div>
+        """,
+        unsafe_allow_html=True
     )
 
-    baris = 0
+    for nomor, langkah_satu in enumerate(
+        langkah,
+        start=1
+    ):
 
-    for kolom in range(M.cols):
+        st.markdown(
+            f"**Langkah {nomor}**"
+        )
 
-        if baris >= M.rows:
-            break
+        st.latex(langkah_satu)
 
-        pivot = None
-
-        for r in range(baris, M.rows):
-
-            if M[r, kolom] != 0:
-
-                pivot = r
-                break
-
-        if pivot is None:
-            continue
-
-        if pivot != baris:
-
-            M.row_swap(
-                pivot,
-                baris
-            )
-
-            langkah.append(
-                (
-                    f"R{baris+1} ↔ R{pivot+1}",
-                    M.copy()
-                )
-            )
-
-        nilai_pivot = M[baris, kolom]
-
-        if nilai_pivot != 1:
-
-            M.row_op(
-                baris,
-                lambda nilai, j:
-                sp.simplify(
-                    nilai / nilai_pivot
-                )
-            )
-
-            langkah.append(
-                (
-                    f"R{baris+1} → "
-                    f"R{baris+1}/({sp.latex(nilai_pivot)})",
-                    M.copy()
-                )
-            )
-
-        for r in range(M.rows):
-
-            if r == baris:
-                continue
-
-            faktor = M[r, kolom]
-
-            if faktor != 0:
-
-                M.row_op(
-                    r,
-                    lambda nilai, j:
-                    sp.simplify(
-                        nilai -
-                        faktor * M[baris, j]
-                    )
-                )
-
-                langkah.append(
-                    (
-                        f"R{r+1} → "
-                        f"R{r+1} - "
-                        f"({sp.latex(faktor)})R{baris+1}",
-                        M.copy()
-                    )
-                )
-
-        baris += 1
-
-    return M, langkah
+    st.markdown(
+        "</div>",
+        unsafe_allow_html=True
+    )
 
 
-# ============================================================
+# =========================================================
 # SIDEBAR
-# ============================================================
+# =========================================================
 
-st.sidebar.title("🧮 Kalkulator")
+st.sidebar.markdown(
+    """
+    <div style="
+        text-align:center;
+        font-size:28px;
+        font-weight:800;
+        margin-bottom:20px;
+    ">
+        🧮 MENU
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 operasi = st.sidebar.selectbox(
     "Pilih Operasi",
@@ -658,11 +386,11 @@ operasi = st.sidebar.selectbox(
     ]
 )
 
-st.sidebar.divider()
+st.sidebar.markdown("---")
 
-st.sidebar.info(
+st.sidebar.markdown(
     """
-    **Operasi yang tersedia:**
+    ### 📚 Operasi
 
     ➕ Penjumlahan
 
@@ -680,22 +408,412 @@ st.sidebar.info(
 
     Σ Trace
 
-    📐 SPL Gauss-Jordan
+    📐 SPL
     """
 )
 
 
-# ============================================================
-# TRANSPOSE
-# ============================================================
+# =========================================================
+# PENJUMLAHAN
+# =========================================================
 
-if operasi == "Transpose":
+if operasi == "Penjumlahan":
 
-    st.header("🔄 Transpose Matriks")
+    st.subheader("➕ Penjumlahan Matriks")
 
     col1, col2 = st.columns(2)
 
     with col1:
+
+        card("Ukuran Matriks A")
+
+        baris_a = st.number_input(
+            "Jumlah baris A",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="add_ra"
+        )
+
+        kolom_a = st.number_input(
+            "Jumlah kolom A",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="add_ka"
+        )
+
+        end_card()
+
+    with col2:
+
+        card("Ukuran Matriks B")
+
+        baris_b = st.number_input(
+            "Jumlah baris B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="add_rb"
+        )
+
+        kolom_b = st.number_input(
+            "Jumlah kolom B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="add_kb"
+        )
+
+        end_card()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        A = input_matrix(
+            "A",
+            int(baris_a),
+            int(kolom_a),
+            "add_A"
+        )
+
+    with col2:
+
+        B = input_matrix(
+            "B",
+            int(baris_b),
+            int(kolom_b),
+            "add_B"
+        )
+
+    if st.button(
+        "➕ HITUNG A + B",
+        type="primary"
+    ):
+
+        if A.shape != B.shape:
+
+            st.error(
+                "❌ Ukuran Matriks A dan B harus sama."
+            )
+
+        else:
+
+            C = A + B
+
+            tampilkan_hasil(
+                "🟢 HASIL A + B",
+                C
+            )
+
+            langkah = []
+
+            for i in range(A.rows):
+
+                for j in range(A.cols):
+
+                    langkah.append(
+                        rf"""
+                        C_{{{i+1},{j+1}}}
+                        =
+                        A_{{{i+1},{j+1}}}
+                        +
+                        B_{{{i+1},{j+1}}}
+                        =
+                        {sp.latex(A[i,j])}
+                        +
+                        {sp.latex(B[i,j])}
+                        =
+                        \mathbf{{{sp.latex(C[i,j])}}}
+                        """
+                    )
+
+            tampilkan_langkah(
+                "📖 LANGKAH PENJUMLAHAN",
+                langkah
+            )
+
+
+# =========================================================
+# PENGURANGAN
+# =========================================================
+
+elif operasi == "Pengurangan":
+
+    st.subheader("➖ Pengurangan Matriks")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        card("Ukuran Matriks A")
+
+        baris_a = st.number_input(
+            "Jumlah baris A",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="sub_ra"
+        )
+
+        kolom_a = st.number_input(
+            "Jumlah kolom A",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="sub_ka"
+        )
+
+        end_card()
+
+    with col2:
+
+        card("Ukuran Matriks B")
+
+        baris_b = st.number_input(
+            "Jumlah baris B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="sub_rb"
+        )
+
+        kolom_b = st.number_input(
+            "Jumlah kolom B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="sub_kb"
+        )
+
+        end_card()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        A = input_matrix(
+            "A",
+            int(baris_a),
+            int(kolom_a),
+            "sub_A"
+        )
+
+    with col2:
+
+        B = input_matrix(
+            "B",
+            int(baris_b),
+            int(kolom_b),
+            "sub_B"
+        )
+
+    if st.button(
+        "➖ HITUNG A - B",
+        type="primary"
+    ):
+
+        if A.shape != B.shape:
+
+            st.error(
+                "❌ Ukuran Matriks A dan B harus sama."
+            )
+
+        else:
+
+            C = A - B
+
+            tampilkan_hasil(
+                "🟢 HASIL A - B",
+                C
+            )
+
+            langkah = []
+
+            for i in range(A.rows):
+
+                for j in range(A.cols):
+
+                    langkah.append(
+                        rf"""
+                        C_{{{i+1},{j+1}}}
+                        =
+                        A_{{{i+1},{j+1}}}
+                        -
+                        B_{{{i+1},{j+1}}}
+                        =
+                        {sp.latex(A[i,j])}
+                        -
+                        {sp.latex(B[i,j])}
+                        =
+                        \mathbf{{{sp.latex(C[i,j])}}}
+                        """
+                    )
+
+            tampilkan_langkah(
+                "📖 LANGKAH PENGURANGAN",
+                langkah
+            )
+
+
+# =========================================================
+# PERKALIAN
+# =========================================================
+
+elif operasi == "Perkalian":
+
+    st.subheader("✖️ Perkalian Matriks")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        card("Ukuran Matriks A")
+
+        baris_a = st.number_input(
+            "Jumlah baris A",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="mul_ra"
+        )
+
+        kolom_a = st.number_input(
+            "Jumlah kolom A",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="mul_ka"
+        )
+
+        end_card()
+
+    with col2:
+
+        card("Ukuran Matriks B")
+
+        baris_b = st.number_input(
+            "Jumlah baris B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="mul_rb"
+        )
+
+        kolom_b = st.number_input(
+            "Jumlah kolom B",
+            min_value=1,
+            max_value=8,
+            value=2,
+            step=1,
+            key="mul_kb"
+        )
+
+        end_card()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        A = input_matrix(
+            "A",
+            int(baris_a),
+            int(kolom_a),
+            "mul_A"
+        )
+
+    with col2:
+
+        B = input_matrix(
+            "B",
+            int(baris_b),
+            int(kolom_b),
+            "mul_B"
+        )
+
+    if st.button(
+        "✖️ HITUNG A × B",
+        type="primary"
+    ):
+
+        if A.cols != B.rows:
+
+            st.error(
+                "❌ Perkalian tidak dapat dilakukan."
+            )
+
+            st.info(
+                "Jumlah kolom A harus sama "
+                "dengan jumlah baris B."
+            )
+
+        else:
+
+            C = A * B
+
+            tampilkan_hasil(
+                "🟢 HASIL A × B",
+                C
+            )
+
+            langkah = []
+
+            for i in range(C.rows):
+
+                for j in range(C.cols):
+
+                    bagian = []
+
+                    for k in range(A.cols):
+
+                        bagian.append(
+                            f"({sp.latex(A[i,k])})"
+                            f"({sp.latex(B[k,j])})"
+                        )
+
+                    persamaan = " + ".join(bagian)
+
+                    langkah.append(
+                        rf"""
+                        C_{{{i+1},{j+1}}}
+                        =
+                        {persamaan}
+                        =
+                        \mathbf{{{sp.latex(C[i,j])}}}
+                        """
+                    )
+
+            tampilkan_langkah(
+                "📖 LANGKAH PERKALIAN",
+                langkah
+            )
+
+
+# =========================================================
+# TRANSPOSE
+# =========================================================
+
+elif operasi == "Transpose":
+
+    st.subheader("🔄 Transpose Matriks")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        card("Ukuran Matriks")
 
         baris = st.number_input(
             "Jumlah baris",
@@ -703,10 +821,14 @@ if operasi == "Transpose":
             max_value=8,
             value=2,
             step=1,
-            key="transpose_baris"
+            key="trans_r"
         )
 
+        end_card()
+
     with col2:
+
+        card("Ukuran Matriks")
 
         kolom = st.number_input(
             "Jumlah kolom",
@@ -714,53 +836,52 @@ if operasi == "Transpose":
             max_value=8,
             value=2,
             step=1,
-            key="transpose_kolom"
+            key="trans_k"
         )
+
+        end_card()
 
     A = input_matrix(
         "A",
         int(baris),
         int(kolom),
-        "transpose"
+        "trans_A"
     )
 
     if st.button(
-        "🔢 HITUNG TRANSPOSE",
-        type="primary",
-        use_container_width=True
+        "🔄 HITUNG TRANSPOSE",
+        type="primary"
     ):
 
-        hasil = A.T
+        C = A.T
 
-        tampilkan_matriks(
-            hasil,
-            "✅ Hasil Aᵀ"
+        tampilkan_hasil(
+            "🟢 HASIL Aᵀ",
+            C
         )
 
-        buka_card(
-            "📖 Langkah Penyelesaian",
-            "step-card"
+        tampilkan_langkah(
+            "📖 LANGKAH TRANSPOSE",
+            [
+                rf"""
+                A =
+                {sp.latex(A)}
+                """,
+                rf"""
+                A^T =
+                {sp.latex(C)}
+                """
+            ]
         )
 
-        st.write(
-            "Transpose dilakukan dengan mengubah "
-            "baris menjadi kolom."
-        )
 
-        st.latex(
-            rf"A^T = {sp.latex(hasil)}"
-        )
-
-        tutup_card()
-
-
-# ============================================================
+# =========================================================
 # DETERMINAN
-# ============================================================
+# =========================================================
 
 elif operasi == "Determinan":
 
-    st.header("📊 Determinan Matriks")
+    st.subheader("📊 Determinan Matriks")
 
     ukuran = st.number_input(
         "Ukuran matriks persegi",
@@ -768,55 +889,83 @@ elif operasi == "Determinan":
         max_value=8,
         value=2,
         step=1,
-        key="det_ukuran"
+        key="det_n"
     )
 
     A = input_matrix(
         "A",
         int(ukuran),
         int(ukuran),
-        "determinan"
+        "det_A"
     )
 
     if st.button(
-        "🔢 HITUNG DETERMINAN",
-        type="primary",
-        use_container_width=True
+        "📊 HITUNG DETERMINAN",
+        type="primary"
     ):
 
-        hasil, langkah = langkah_determinan(A)
+        hasil = sp.simplify(A.det())
 
-        tampilkan_matriks(
-            sp.Matrix([[hasil]]),
-            "✅ Hasil Determinan"
+        tampilkan_hasil(
+            "🟢 HASIL DETERMINAN",
+            sp.Matrix([[hasil]])
         )
 
-        buka_card(
-            "📖 Langkah Penyelesaian",
-            "step-card"
-        )
+        langkah = []
 
-        for nomor, item in enumerate(
-            langkah,
-            start=1
-        ):
+        if A.rows == 2:
 
-            st.write(
-                f"**Langkah {nomor}**"
+            a = A[0, 0]
+            b = A[0, 1]
+            c = A[1, 0]
+            d = A[1, 1]
+
+            langkah.append(
+                rf"""
+                \det(A)
+                =
+                ({sp.latex(a)})
+                ({sp.latex(d)})
+                -
+                ({sp.latex(b)})
+                ({sp.latex(c)})
+                """
             )
 
-            st.latex(item)
+            langkah.append(
+                rf"""
+                =
+                {sp.latex(a*d)}
+                -
+                {sp.latex(b*c)}
+                =
+                \mathbf{{{sp.latex(hasil)}}}
+                """
+            )
 
-        tutup_card()
+        else:
+
+            langkah.append(
+                rf"""
+                \det(A)
+                =
+                \mathbf{{{sp.latex(hasil)}}}
+                """
+            )
+
+        tampilkan_langkah(
+            "📖 LANGKAH DETERMINAN",
+            langkah
+        )
 
 
-# ============================================================
+# =========================================================
 # INVERS
-# ============================================================
+# =========================================================
 
 elif operasi == "Invers":
 
-    st.header("🔁 Invers Matriks")
+    st.subheader("🔁 Invers Matriks")
 
     ukuran = st.number_input(
         "Ukuran matriks persegi",
@@ -824,20 +973,19 @@ elif operasi == "Invers":
         max_value=8,
         value=2,
         step=1,
-        key="inv_ukuran"
+        key="inv_n"
     )
 
     A = input_matrix(
         "A",
         int(ukuran),
         int(ukuran),
-        "invers"
+        "inv_A"
     )
 
     if st.button(
-        "🔢 HITUNG INVERS",
-        type="primary",
-        use_container_width=True
+        "🔁 HITUNG INVERS",
+        type="primary"
     ):
 
         det = sp.simplify(A.det())
@@ -845,191 +993,36 @@ elif operasi == "Invers":
         if det == 0:
 
             st.error(
-                "Matriks tidak memiliki invers "
+                "❌ Matriks tidak memiliki invers "
                 "karena determinannya = 0."
             )
 
         else:
 
-            hasil, langkah = langkah_invers(A)
+            C = A.inv()
 
-            tampilkan_matriks(
-                hasil,
-                "✅ Hasil A⁻¹"
+            tampilkan_hasil(
+                "🟢 HASIL A⁻¹",
+                C
             )
 
-            buka_card(
-                "📖 Langkah Penyelesaian",
-                "step-card"
+            langkah = [
+                rf"""
+                \det(A)
+                =
+                {sp.latex(det)}
+                """,
+                rf"""
+                A^{{-1}}
+                =
+                {sp.latex(C)}
+                """
+            ]
+
+            tampilkan_langkah(
+                "📖 LANGKAH INVERS",
+                langkah
             )
 
-            for nomor, item in enumerate(
-                langkah,
-                start=1
-            ):
 
-                st.write(
-                    f"**Langkah {nomor}**"
-                )
-
-                st.latex(item)
-
-            tutup_card()
-
-
-# ============================================================
-# RANK
-# ============================================================
-
-elif operasi == "Rank":
-
-    st.header("📈 Rank Matriks")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        baris = st.number_input(
-            "Jumlah baris",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="rank_baris"
-        )
-
-    with col2:
-
-        kolom = st.number_input(
-            "Jumlah kolom",
-            min_value=1,
-            max_value=8,
-            value=2,
-            step=1,
-            key="rank_kolom"
-        )
-
-    A = input_matrix(
-        "A",
-        int(baris),
-        int(kolom),
-        "rank"
-    )
-
-    if st.button(
-        "🔢 HITUNG RANK",
-        type="primary",
-        use_container_width=True
-    ):
-
-        hasil = A.rank()
-
-        rref, langkah = rref_dengan_langkah(A)
-
-        buka_card(
-            "✅ Hasil Rank",
-            "result-card"
-        )
-
-        st.latex(
-            rf"\operatorname{{rank}}(A)"
-            rf" = \mathbf{{{hasil}}}"
-        )
-
-        tutup_card()
-
-        buka_card(
-            "📖 Langkah RREF",
-            "step-card"
-        )
-
-        for nomor, (deskripsi, matriks) in enumerate(
-            langkah,
-            start=1
-        ):
-
-            st.write(
-                f"**Langkah {nomor}: {deskripsi}**"
-            )
-
-            st.latex(
-                sp.latex(matriks)
-            )
-
-        tutup_card()
-
-
-# ============================================================
-# TRACE
-# ============================================================
-
-elif operasi == "Trace":
-
-    st.header("Σ Trace Matriks")
-
-    ukuran = st.number_input(
-        "Ukuran matriks persegi",
-        min_value=1,
-        max_value=8,
-        value=2,
-        step=1,
-        key="trace_ukuran"
-    )
-
-    A = input_matrix(
-        "A",
-        int(ukuran),
-        int(ukuran),
-        "trace"
-    )
-
-    if st.button(
-        "🔢 HITUNG TRACE",
-        type="primary",
-        use_container_width=True
-    ):
-
-        hasil = sp.trace(A)
-
-        diagonal = []
-
-        for i in range(A.rows):
-
-            diagonal.append(
-                sp.latex(A[i, i])
-            )
-
-        persamaan = " + ".join(diagonal)
-
-        buka_card(
-            "✅ Hasil Trace",
-            "result-card"
-        )
-
-        st.latex(
-            rf"\operatorname{{tr}}(A)"
-            rf" = \mathbf{{{sp.latex(hasil)}}}"
-        )
-
-        tutup_card()
-
-        buka_card(
-            "📖 Langkah Penyelesaian",
-            "step-card"
-        )
-
-        st.latex(
-            rf"\operatorname{{tr}}(A)"
-            rf" = {persamaan}"
-        )
-
-        st.latex(
-            rf"= \mathbf{{{sp.latex(hasil)}}}"
-        )
-
-        tutup_card()
-
-
-# ============================================================
-# PENJUMLAHAN
-# =====================================================
+# ========================================
